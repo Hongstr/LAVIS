@@ -154,3 +154,6 @@ debug*/
 *.gz
 
 cache/
+
+# for output files
+*.out
