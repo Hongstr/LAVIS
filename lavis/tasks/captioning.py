@@ -107,22 +107,35 @@ from torchvision.datasets.utils import download_url
 
 
 def coco_caption_eval(coco_gt_root, results_file, split):
-    urls = {
-        "val": "https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val_gt.json",
-        "test": "https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_test_gt.json",
-    }
-    filenames = {
-        "val": "coco_karpathy_val_gt.json",
-        "test": "coco_karpathy_test_gt.json",
-    }
+    # urls = {
+    #     "val": "https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val_gt.json",
+    #     "test": "https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_test_gt.json",
+    # }
+    # filenames = {
+    #     "val": "coco_karpathy_val_gt.json",
+    #     "test": "coco_karpathy_test_gt.json",
+    # }
 
-    download_url(urls[split], coco_gt_root)
-    annotation_file = os.path.join(coco_gt_root, filenames[split])
+    # download_url(urls[split], coco_gt_root)
+    # annotation_file = os.path.join(coco_gt_root, filenames[split])
+
+    filenames = {
+        'val': "val_gt.json",
+        'test': 'val_gt.json'
+    }
+    ui_gt_root = os.path.join(registry.get_path("cache_root"), "ui/annotations")
+    annotation_file = os.path.join(ui_gt_root, filenames[split])
 
     # create coco object and coco_result object
     coco = COCO(annotation_file)
+    # print(coco.getImgIds())
+    # with open(results_file) as f:
+    #     anns = json.load(f)
+    # annsImgIds = [ann['image_id'] for ann in anns]
+    # print(annsImgIds)
+    # print("++++++++++++")
     coco_result = coco.loadRes(results_file)
-
+    
     # create coco_eval object by taking coco and coco_result
     coco_eval = COCOEvalCap(coco, coco_result)
 
