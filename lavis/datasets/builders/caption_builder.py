@@ -18,6 +18,19 @@ from lavis.datasets.datasets.video_caption_datasets import (
     VideoCaptionEvalDataset,
 )
 
+from lavis.datasets.datasets.ui_caption_datasets import (
+    UICapDataset, UICapEvalDataset
+)
+
+@registry.register_builder("ui_caption")
+class UICapBuilder(BaseDatasetBuilder):
+    train_dataset_cls = UICapDataset
+    eval_dataset_cls = UICapEvalDataset
+
+    DATASET_CONFIG_DICT = {
+        "default": "configs/datasets/ui/defaults_cap.yaml",
+    }
+
 
 @registry.register_builder("coco_caption")
 class COCOCapBuilder(BaseDatasetBuilder):
