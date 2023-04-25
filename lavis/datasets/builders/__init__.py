@@ -11,6 +11,7 @@ from lavis.datasets.builders.caption_builder import (
     MSRVTTCapBuilder,
     MSVDCapBuilder,
     VATEXCapBuilder,
+    UICapBuilder
 )
 from lavis.datasets.builders.image_text_pair_builder import (
     ConceptualCaption12MBuilder,
@@ -42,6 +43,7 @@ from lavis.common.registry import registry
 
 __all__ = [
     "COCOCapBuilder",
+    "UICapBuilder",
     "COCORetrievalBuilder",
     "COCOVQABuilder",
     "ConceptualCaption12MBuilder",
