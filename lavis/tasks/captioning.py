@@ -121,7 +121,7 @@ def coco_caption_eval(coco_gt_root, results_file, split):
 
     filenames = {
         'val': "val_gt.json",
-        'test': 'val_gt.json'
+        'test': 'test_gt.json'
     }
     ui_gt_root = os.path.join(registry.get_path("cache_root"), "ui/annotations")
     annotation_file = os.path.join(ui_gt_root, filenames[split])

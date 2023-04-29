@@ -19,7 +19,7 @@ datasets:
           url: /home/shanchuh/data/ui/val.json
           storage:  ui/annotations/val.json
         test:
-          url: /home/shanchuh/data/ui/val.json
-          storage:  ui/annotations/val.json
+          url: /home/shanchuh/data/ui/test.json
+          storage:  ui/annotations/test.json
       images:
         storage: /home/shanchuh/data/ui/images
