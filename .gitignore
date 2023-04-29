@@ -145,14 +145,14 @@ dmypy.json
 cython_debug/
 
 # project-specific
-output/
+# output/
 debug*/
 *.bak
 *.dir
 *.dat
 *.tsv
 *.gz
-
+*.pth
 cache/
 
 # for output files
