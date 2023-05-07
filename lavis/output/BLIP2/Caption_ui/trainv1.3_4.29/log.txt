@@ -1,0 +1,149 @@
+{
+    "run": {
+        "task": "captioning",
+        "lr_sched": "linear_warmup_cosine_lr",
+        "init_lr": 1e-05,
+        "min_lr": 0,
+        "warmup_lr": 1e-08,
+        "warmup_steps": 1000,
+        "weight_decay": 0.05,
+        "max_epoch": 15,
+        "batch_size_train": 32,
+        "batch_size_eval": 8,
+        "num_workers": 4,
+        "accum_grad_iters": 1,
+        "max_len": 30,
+        "min_len": 8,
+        "num_beams": 5,
+        "seed": 42,
+        "output_dir": "output/BLIP2/Caption_ui",
+        "amp": true,
+        "resume_ckpt_path": null,
+        "evaluate": false,
+        "train_splits": [
+            "train"
+        ],
+        "valid_splits": [
+            "val"
+        ],
+        "test_splits": [
+            "test"
+        ],
+        "device": "cuda",
+        "world_size": 1,
+        "dist_url": "env://",
+        "distributed": true,
+        "rank": 0,
+        "gpu": 0,
+        "dist_backend": "nccl"
+    },
+    "model": {
+        "arch": "blip2_opt",
+        "load_finetuned": false,
+        "pretrained": "https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_opt2.7b.pth",
+        "finetuned": "https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_caption_opt2.7b.pth",
+        "image_size": 364,
+        "drop_path_rate": 0,
+        "use_grad_checkpoint": true,
+        "vit_precision": "fp32",
+        "freeze_vit": false,
+        "num_query_token": 32,
+        "opt_model": "facebook/opt-2.7b",
+        "prompt": "a photo of",
+        "model_type": "caption_ui_opt2.7b"
+    },
+    "preprocess": {
+        "vis_processor": {
+            "train": {
+                "name": "blip_image_train",
+                "image_size": 364
+            },
+            "eval": {
+                "name": "blip_image_eval",
+                "image_size": 364
+            }
+        },
+        "text_processor": {
+            "train": {
+                "name": "blip_caption"
+            },
+            "eval": {
+                "name": "blip_caption"
+            }
+        }
+    },
+    "datasets": {
+        "ui_caption": {
+            "dataset_card": "dataset_card/ui_caption.md",
+            "data_type": "images",
+            "build_info": {
+                "annotations": {
+                    "train": {
+                        "url": "/home/shanchuh/data/ui/train.json",
+                        "storage": "ui/annotations/train.json"
+                    },
+                    "val": {
+                        "url": "/home/shanchuh/data/ui/val.json",
+                        "storage": "ui/annotations/val.json"
+                    },
+                    "test": {
+                        "url": "/home/shanchuh/data/ui/test.json",
+                        "storage": "ui/annotations/test.json"
+                    }
+                },
+                "images": {
+                    "storage": "/home/shanchuh/data/ui/images"
+                }
+            },
+            "vis_processor": {
+                "train": {
+                    "name": "blip2_image_train",
+                    "image_size": 364
+                },
+                "eval": {
+                    "name": "blip_image_eval",
+                    "image_size": 364
+                }
+            },
+            "text_processor": {
+                "train": {
+                    "name": "blip_caption",
+                    "prompt": "a photo of"
+                },
+                "eval": {
+                    "name": "blip_caption"
+                }
+            }
+        }
+    }
+}
+{"train_lr": "0.000", "train_loss": "2.610"}
+{"val_Bleu_1": 0.5297159172952006, "val_Bleu_2": 0.4835623837255456, "val_Bleu_3": 0.4616804689126458, "val_Bleu_4": 0.45830936607884265, "val_METEOR": 0.36508809461597036, "val_ROUGE_L": 0.7512031351615254, "val_CIDEr": 6.362533906441006, "val_SPICE": 0.675286755566313, "val_agg_metrics": 6.8208432725198485, "val_best_epoch": 0}
+{"train_lr": "0.000", "train_loss": "0.134"}
+{"val_Bleu_1": 0.9093859943607231, "val_Bleu_2": 0.8830403620821791, "val_Bleu_3": 0.8742692787619111, "val_Bleu_4": 0.8704309117840161, "val_METEOR": 0.6060540449491348, "val_ROUGE_L": 0.9036064371339846, "val_CIDEr": 8.628298341035155, "val_SPICE": 0.8968908396980616, "val_agg_metrics": 9.498729252819171, "val_best_epoch": 1}
+{"train_lr": "0.000", "train_loss": "0.072"}
+{"val_Bleu_1": 0.9189300226051196, "val_Bleu_2": 0.904078594134081, "val_Bleu_3": 0.9003369003135288, "val_Bleu_4": 0.9005382214154404, "val_METEOR": 0.646020383673862, "val_ROUGE_L": 0.9363330173203596, "val_CIDEr": 9.100655271018898, "val_SPICE": 0.9313177213002489, "val_agg_metrics": 10.001193492434338, "val_best_epoch": 2}
+{"train_lr": "0.000", "train_loss": "0.059"}
+{"val_Bleu_1": 0.9364069434866112, "val_Bleu_2": 0.9183914762054078, "val_Bleu_3": 0.9118922801891036, "val_Bleu_4": 0.9090227507628966, "val_METEOR": 0.6466802770656835, "val_ROUGE_L": 0.9331357221801437, "val_CIDEr": 9.028846799385256, "val_SPICE": 0.9248403702684425, "val_agg_metrics": 9.937869550148154, "val_best_epoch": 2}
+{"train_lr": "0.000", "train_loss": "0.052"}
+{"val_Bleu_1": 0.9233245456686449, "val_Bleu_2": 0.9085271692736171, "val_Bleu_3": 0.90452236551221, "val_Bleu_4": 0.9044654260407287, "val_METEOR": 0.6482487915295634, "val_ROUGE_L": 0.9372476770234193, "val_CIDEr": 9.110499305170617, "val_SPICE": 0.9294817393827296, "val_agg_metrics": 10.014964731211345, "val_best_epoch": 4}
+{"train_lr": "0.000", "train_loss": "0.052"}
+{"val_Bleu_1": 0.928953841209117, "val_Bleu_2": 0.9155060661238881, "val_Bleu_3": 0.9120227275376024, "val_Bleu_4": 0.9122337416160248, "val_METEOR": 0.6569813356601044, "val_ROUGE_L": 0.9414630090425931, "val_CIDEr": 9.16957679142632, "val_SPICE": 0.9341279182863341, "val_agg_metrics": 10.081810533042344, "val_best_epoch": 5}
+{"train_lr": "0.000", "train_loss": "0.046"}
+{"val_Bleu_1": 0.9410839830335193, "val_Bleu_2": 0.9262258944142882, "val_Bleu_3": 0.9213239546439652, "val_Bleu_4": 0.9196035081659083, "val_METEOR": 0.6610151292877253, "val_ROUGE_L": 0.9420047729557527, "val_CIDEr": 9.171842600746531, "val_SPICE": 0.9358141373284065, "val_agg_metrics": 10.09144610891244, "val_best_epoch": 6}
+{"train_lr": "0.000", "train_loss": "0.045"}
+{"val_Bleu_1": 0.9427212491515543, "val_Bleu_2": 0.9308123727197524, "val_Bleu_3": 0.927840681722289, "val_Bleu_4": 0.9278439342012654, "val_METEOR": 0.6740600432528733, "val_ROUGE_L": 0.950569338965093, "val_CIDEr": 9.307878403565256, "val_SPICE": 0.947126141185547, "val_agg_metrics": 10.235722337766521, "val_best_epoch": 7}
+{"train_lr": "0.000", "train_loss": "0.043"}
+{"val_Bleu_1": 0.9470543901256376, "val_Bleu_2": 0.9330674781660162, "val_Bleu_3": 0.9288333446060376, "val_Bleu_4": 0.9276353699635151, "val_METEOR": 0.6686406510936734, "val_ROUGE_L": 0.9459225259776747, "val_CIDEr": 9.235366606157802, "val_SPICE": 0.942008486562942, "val_agg_metrics": 10.163001976121317, "val_best_epoch": 7}
+{"train_lr": "0.000", "train_loss": "0.042"}
+{"val_Bleu_1": 0.9408066849331213, "val_Bleu_2": 0.9296405712076579, "val_Bleu_3": 0.9271404255633143, "val_Bleu_4": 0.9276735819407717, "val_METEOR": 0.6755050624802549, "val_ROUGE_L": 0.9514358669433749, "val_CIDEr": 9.320899923685484, "val_SPICE": 0.9478805023359479, "val_agg_metrics": 10.248573505626256, "val_best_epoch": 9}
+{"train_lr": "0.000", "train_loss": "0.039"}
+{"val_Bleu_1": 0.9456602681948335, "val_Bleu_2": 0.9328071409441453, "val_Bleu_3": 0.9292384909882746, "val_Bleu_4": 0.9286218536946336, "val_METEOR": 0.6723663409428319, "val_ROUGE_L": 0.9483717448183374, "val_CIDEr": 9.274786918374037, "val_SPICE": 0.9448630577343449, "val_agg_metrics": 10.20340877206867, "val_best_epoch": 9}
+{"train_lr": "0.000", "train_loss": "0.035"}
+{"val_Bleu_1": 0.9354739641888599, "val_Bleu_2": 0.9224510622556692, "val_Bleu_3": 0.9189597185792492, "val_Bleu_4": 0.9188432932401853, "val_METEOR": 0.6635238698267173, "val_ROUGE_L": 0.944657508016183, "val_CIDEr": 9.21632643172092, "val_SPICE": 0.9389647044859624, "val_agg_metrics": 10.135169724961106, "val_best_epoch": 9}
+{"train_lr": "0.000", "train_loss": "0.035"}
+{"val_Bleu_1": 0.9411306050837684, "val_Bleu_2": 0.9260094775088877, "val_Bleu_3": 0.9214820214746382, "val_Bleu_4": 0.9202242811436746, "val_METEOR": 0.6598951000604096, "val_ROUGE_L": 0.9409285789559918, "val_CIDEr": 9.163668384693981, "val_SPICE": 0.9361358501719595, "val_agg_metrics": 10.083892665837656, "val_best_epoch": 9}
+{"train_lr": "0.000", "train_loss": "0.035"}
+{"val_Bleu_1": 0.9417418286643335, "val_Bleu_2": 0.9291850150645636, "val_Bleu_3": 0.925778439891124, "val_Bleu_4": 0.9254327665067722, "val_METEOR": 0.670046870746484, "val_ROUGE_L": 0.9482002133255366, "val_CIDEr": 9.269117939080482, "val_SPICE": 0.9437737568197673, "val_agg_metrics": 10.194550705587254, "val_best_epoch": 9}
+{"train_lr": "0.000", "train_loss": "0.033"}
+{"val_Bleu_1": 0.9443587787209479, "val_Bleu_2": 0.9316736655679804, "val_Bleu_3": 0.9281901604650258, "val_Bleu_4": 0.9276503901380185, "val_METEOR": 0.6717120337936681, "val_ROUGE_L": 0.9485555154929631, "val_CIDEr": 9.275653142850057, "val_SPICE": 0.9446224131139682, "val_agg_metrics": 10.203303532988075, "val_best_epoch": 9}
